@@ -393,7 +393,11 @@ function dvwaHtmlEcho( $pPage ) {
 	<head>
 		<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />
 
-		<title>{$pPage[ 'title' ]}</title>
+         //ANTES (VULNERABILIDAD)
+		//<title>{$pPage[ 'title' ]}</title>
+
+         //DESPUES (MITIGACION)
+                <title><?php echo htmlspecialchars( $pPage[ 'title' ], ENT_QUOTES, 'UTF-8' ); ?></title>
 
 		<link rel=\"stylesheet\" type=\"text/css\" href=\"" . DVWA_WEB_PAGE_TO_ROOT . "dvwa/css/main.css\" />
 
@@ -403,7 +407,10 @@ function dvwaHtmlEcho( $pPage ) {
 
 	</head>
 
-	<body class=\"home " . dvwaThemeGet() . "\">
+       //ANTES (VULNERABILIDAD)
+	//<body class=\"home " . dvwaThemeGet() . "\">
+       //DESPUES (MITIGACION)
+	<body class="home <?php echo htmlspecialchars( dvwaThemeGet(), ENT_QUOTES, 'UTF-8' ); ?>">
 		<div id=\"container\">
 
 			<div id=\"header\">
